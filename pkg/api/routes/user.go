@@ -3,13 +3,13 @@ package routes
 import (
 	"github.com/abhinandkakkadi/offer-store/pkg/api/handler"
 	"github.com/abhinandkakkadi/offer-store/pkg/api/middleware"
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
-func UserRoutes(router *gin.RouterGroup, userHandler *handler.UserHandler) {
+func UserRoutes(router fiber.Router, userHandler *handler.UserHandler) {
 
 	router.Use(middleware.AuthMiddleware())
-	router.POST("/signup", userHandler.UserSignUp)
-	router.POST("/login", userHandler.LoginHandler)
+	router.Post("/signup", userHandler.UserSignUp)
+	router.Post("/login", userHandler.LoginHandler)
 	
 }

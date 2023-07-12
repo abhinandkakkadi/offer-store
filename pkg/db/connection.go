@@ -3,20 +3,21 @@ package db
 import (
 	"fmt"
 
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
 	config "github.com/abhinandkakkadi/offer-store/pkg/config"
-	domain "github.com/abhinandkakkadi/offer-store/pkg/domain"
 )
 
 func ConnectDatabase(cfg config.Config) (*gorm.DB, error) {
-	psqlInfo := fmt.Sprintf("host=%s user=%s dbname=%s port=%s password=%s", cfg.DBHost, cfg.DBUser, cfg.DBName, cfg.DBPort, cfg.DBPassword)
-	db, dbErr := gorm.Open(postgres.Open(psqlInfo), &gorm.Config{
+	fmt.Printf("%+v",cfg)
+	dsn := cfg.DB_USERNAME +":"+ cfg.DB_PASSWORD +"@tcp"+ "(" + cfg.DB_HOST + ":" + cfg.DB_PORT +")/" + cfg.DB_NAME + "?" + "parseTime=true&loc=Local"
+	db, dbErr := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		SkipDefaultTransaction: true,
 	})
 
-	db.AutoMigrate(&domain.Users{})
+	fmt.Println(db,dbErr)
+
 	return db, dbErr
 
 }

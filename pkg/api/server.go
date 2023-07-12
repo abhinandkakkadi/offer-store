@@ -5,8 +5,8 @@ import (
 	handler "github.com/abhinandkakkadi/offer-store/pkg/api/handler"
 	"github.com/abhinandkakkadi/offer-store/pkg/api/routes"
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/gofiber/fiber"
+	"gorm.io/gorm/logger"
 )
 
 type ServerHTTP struct {
@@ -14,14 +14,10 @@ type ServerHTTP struct {
 }
 
 func NewServerHTTP(userHandler *handler.UserHandler) *ServerHTTP {
-	router := gin.New()
-
-	router.LoadHTMLGlob("templates/*.html")
-
-	router.Use(gin.Logger())
-
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
+	
+	router := fiber.New()
+	router.Use(logger.New(logger.Writer, logger.Config))
+	
 	routes.UserRoutes(router.Group("/"), userHandler)
 
 	return &ServerHTTP{engine: router}
