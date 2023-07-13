@@ -29,7 +29,6 @@ func InitializeAPI(cfg config.Config) (*http.ServerHTTP, interfaces.UserReposito
 	userUseCase := usecase.NewUserUseCase(userRepository)
 	userHandler := handler.NewUserHandler(userUseCase)
 	serverHTTP := http.NewServerHTTP(userHandler)
-	// usecase.OfferUseCase(userRepository)
 
 	return serverHTTP, userRepository, nil
 

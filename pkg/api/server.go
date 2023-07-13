@@ -19,10 +19,12 @@ func NewServerHTTP(userHandler *handler.UserHandler) *ServerHTTP {
 
 	router := fiber.New()
 
-	router.Use(compress.New(compress.Config{
-		Level: compress.LevelBestSpeed,
+		// Middleware function for data compression
+		router.Use(compress.New(compress.Config{
+			Level: compress.LevelBestSpeed,
 	}))
 
+	// Setting Swagger Routes
 	router.Get("/swagger/*", swagger.HandlerDefault)
 
 	routes.UserRoutes(router.Group("/"), userHandler)
@@ -30,6 +32,7 @@ func NewServerHTTP(userHandler *handler.UserHandler) *ServerHTTP {
 	return &ServerHTTP{engine: router}
 }
 
+// server starting
 func (sh *ServerHTTP) Start(userRepository interfaces.UserRepository) {
 	go usecase.OfferUseCase(userRepository)
 	sh.engine.Listen(":3000")

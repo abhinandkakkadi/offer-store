@@ -43,14 +43,15 @@ func (u *UserHandler) GetValueBasedOnCountry(c *fiber.Ctx) error {
 
 	sucRes := response.ClientResponse(http.StatusOK, "successfully retrieved offers", offerBasedOnCountry, nil)
 
+	// check the Type of data to be sent by checking the header value of "Type"
 	contentType := c.Get("Type")
 
 	if contentType == "json" {
-
+		// sent back json response
 		c.JSON(sucRes)
 
 	} else if contentType == "bson" {
-
+		// sent back bson response
 		bsonData, err := bson.Marshal(sucRes)
 		if err != nil {
 			c.Status(fiber.StatusInternalServerError).SendString("Error marshaling data to BSON")
@@ -64,9 +65,6 @@ func (u *UserHandler) GetValueBasedOnCountry(c *fiber.Ctx) error {
 		c.Status(http.StatusBadRequest).SendString("specify json or bson")
 
 	}
-
-	// c.Status(http.StatusOK).JSON(sucRes)
-
 	return nil
 }
 
