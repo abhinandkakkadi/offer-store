@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/abhinandkakkadi/offer-store/cmd/api/docs"
+	_ "github.com/abhinandkakkadi/offer-store/cmd/api/docs"
 	config "github.com/abhinandkakkadi/offer-store/pkg/config"
 	di "github.com/abhinandkakkadi/offer-store/pkg/di"
 	_ "github.com/swaggo/files"
