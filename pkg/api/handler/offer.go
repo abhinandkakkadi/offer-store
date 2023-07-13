@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
@@ -85,8 +84,6 @@ func (u *UserHandler) AddNewOffer(c *fiber.Ctx) error {
 		c.Status(http.StatusBadRequest).JSON(errRes)
 		return nil
 	}
-
-	fmt.Println(addOffer)
 
 	err := u.userUseCase.AddNewOffer(addOffer)
 	if err != nil {

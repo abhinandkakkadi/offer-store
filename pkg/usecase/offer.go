@@ -6,6 +6,7 @@ import (
 	interfaces "github.com/abhinandkakkadi/offer-store/pkg/repository/interface"
 	services "github.com/abhinandkakkadi/offer-store/pkg/usecase/interface"
 	"github.com/abhinandkakkadi/offer-store/pkg/utils/models"
+	"github.com/go-playground/validator/v10"
 )
 
 type userUseCase struct {
@@ -37,7 +38,13 @@ func (u *userUseCase) AddNewOffer(addOffer models.AddNewOffer) error {
 		return errors.New("country does not exists")
 	}
 
-	err := u.repo.AddNewOffer(addOffer)
+	// the received value does not follow the specified constraints
+	err := validator.New().Struct(addOffer)
+	if err != nil {
+		return err
+	}
+
+	err = u.repo.AddNewOffer(addOffer)
 	if err != nil {
 		return err
 	}

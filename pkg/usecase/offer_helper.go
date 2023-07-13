@@ -7,6 +7,7 @@ import (
 	"github.com/abhinandkakkadi/offer-store/pkg/utils/models"
 )
 
+// RAM storage for all countries
 var OfferContainerUS = []models.OfferCompany{}
 var OfferContainerCA = []models.OfferCompany{}
 var OfferContainerFR = []models.OfferCompany{}
@@ -38,6 +39,7 @@ func OfferUseCase(userRepository interfaces.UserRepository) {
 
 }
 
+// checking the country for which offer should be returned
 func ReturnOffer(country string) []models.OfferCompany {
 
 	switch {
@@ -56,6 +58,7 @@ func ReturnOffer(country string) []models.OfferCompany {
 
 var ValidCountryValues = []string{"US", "CA", "FR", "BR"}
 
+// checking whether the country exists or not
 func contains(value string) bool {
 
 	for _, item := range ValidCountryValues {
