@@ -6,11 +6,11 @@ import (
 )
 
 type Config struct {
-	DB_USERNAME     string `mapstructure:"DB_USERNAME"`
-	DB_PASSWORD     string `mapstructure:"DB_PASSWORD"`
+	DB_USERNAME string `mapstructure:"DB_USERNAME"`
+	DB_PASSWORD string `mapstructure:"DB_PASSWORD"`
 	DB_NAME     string `mapstructure:"DB_NAME"`
 	DB_HOST     string `mapstructure:"DB_HOST"`
-	DB_PORT  string `mapstructure:"DB_PORT"`
+	DB_PORT     string `mapstructure:"DB_PORT"`
 }
 
 var envs = []string{

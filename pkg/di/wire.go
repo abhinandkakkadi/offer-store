@@ -4,13 +4,13 @@
 package di
 
 import (
-	"github.com/google/wire"
 	http "github.com/abhinandkakkadi/offer-store/pkg/api"
 	handler "github.com/abhinandkakkadi/offer-store/pkg/api/handler"
 	config "github.com/abhinandkakkadi/offer-store/pkg/config"
 	db "github.com/abhinandkakkadi/offer-store/pkg/db"
 	repository "github.com/abhinandkakkadi/offer-store/pkg/repository"
 	usecase "github.com/abhinandkakkadi/offer-store/pkg/usecase"
+	"github.com/google/wire"
 )
 
 func InitializeAPI(cfg config.Config) (*http.ServerHTTP, error) {

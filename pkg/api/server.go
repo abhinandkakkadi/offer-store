@@ -4,25 +4,27 @@ import (
 	_ "github.com/abhinandkakkadi/offer-store/pkg/api/handler"
 	handler "github.com/abhinandkakkadi/offer-store/pkg/api/handler"
 	"github.com/abhinandkakkadi/offer-store/pkg/api/routes"
-	"github.com/gin-gonic/gin"
 	"github.com/gofiber/fiber"
-	"gorm.io/gorm/logger"
+	"github.com/gofiber/fiber/v2/middleware/compress"
 )
 
 type ServerHTTP struct {
-	engine *gin.Engine
+	engine *fiber.App
 }
 
 func NewServerHTTP(userHandler *handler.UserHandler) *ServerHTTP {
-	
+
 	router := fiber.New()
-	router.Use(logger.New(logger.Writer, logger.Config))
-	
+
+	router.Use(compress.New(compress.Config{
+		Level: compress.LevelBestSpeed, 
+	}))
+
 	routes.UserRoutes(router.Group("/"), userHandler)
 
 	return &ServerHTTP{engine: router}
 }
 
 func (sh *ServerHTTP) Start() {
-	sh.engine.Run(":3000")
+	sh.engine.Listen(":3000")
 }

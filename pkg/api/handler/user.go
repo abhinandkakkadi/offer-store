@@ -27,8 +27,6 @@ func NewUserHandler(usecase services.UserUseCase) *UserHandler {
 // @Router /signup [post]
 func (u *UserHandler) UserSignUp(c *fiber.Ctx) {
 
-
-
 }
 
 // @Summary LogIn functionality for user
@@ -41,6 +39,5 @@ func (u *UserHandler) UserSignUp(c *fiber.Ctx) {
 // @Failure 500 {object} response.Response{}
 // @Router /login [post]
 func (u *UserHandler) LoginHandler(c *fiber.Ctx) {
-
 
 }
