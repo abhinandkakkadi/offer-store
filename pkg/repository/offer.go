@@ -18,8 +18,14 @@ func NewUserRepository(DB *gorm.DB) interfaces.UserRepository {
 
 func (u *UserDatabase) GetOfferBasedOnCountry(country string) []models.OfferCompany {
 
+	// to check whether the offer still active and is after the the show_from date
+	// var Offer []models.OfferCompany
+	// if err := u.DB.Raw("SELECT * FROM offer_company WHERE country = ?	AND CURDATE() BETWEEN valid_from AND valid_to and CURDATE() >= show_from", country).Scan(&Offer).Error; err != nil {
+	// 	fmt.Println(err)
+	// }
+
 	var Offer []models.OfferCompany
-	if err := u.DB.Raw("select * from offer_company where country = ?", country).Scan(&Offer).Error; err != nil {
+	if err := u.DB.Raw("SELECT * FROM offer_company WHERE country = ?	ORDER BY valid_from desc", country).Scan(&Offer).Error; err != nil {
 		fmt.Println(err)
 	}
 

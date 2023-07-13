@@ -13,8 +13,7 @@ var OfferContainerCA = []models.OfferCompany{}
 var OfferContainerFR = []models.OfferCompany{}
 var OfferContainerBR = []models.OfferCompany{}
 
-
-// function to retrieve offers from database in every 10 seconds 
+// function to retrieve offers from database in every 10 seconds
 func OfferUseCase(userRepository interfaces.UserRepository) {
 
 	for {

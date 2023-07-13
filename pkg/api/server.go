@@ -21,9 +21,9 @@ func NewServerHTTP(userHandler *handler.UserHandler) *ServerHTTP {
 
 	router := fiber.New()
 
-		// Middleware function for data compression
-		router.Use(compress.New(compress.Config{
-			Level: gzip.BestSpeed,
+	// Middleware function for data compression
+	router.Use(compress.New(compress.Config{
+		Level: gzip.BestSpeed,
 	}))
 
 	// Setting Swagger Routes
