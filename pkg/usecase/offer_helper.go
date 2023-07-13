@@ -6,11 +6,27 @@ import (
 )
 
 
-var OfferContainer = models.OfferCompany{}
+var OfferContainerUS = models.OfferCompany{}
+var OfferContainerCA = models.OfferCompany{}
 
 func OfferUseCase(userRepository interfaces.UserRepository) {
 
-	userRepository.GetOfferBasedOnCountry("US",OfferContainer)
-	userRepository.GetOfferBasedOnCountry("CA",OfferContainer)
+	OfferContainerUS = userRepository.GetOfferBasedOnCountry("US",OfferContainerUS)
+	OfferContainerCA = userRepository.GetOfferBasedOnCountry("CA",OfferContainerCA)
+	u := userUseCase{}
+	u.GetValueBasedOnCountry()
 
+}
+
+func ReturnOffer(country string) models.OfferCompany {
+
+	if country == "US" {
+		return OfferContainerUS
+	}
+
+	if country == "CA" {
+		return OfferContainerCA
+	}
+
+	return models.OfferCompany{}
 }

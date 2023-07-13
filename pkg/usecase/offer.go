@@ -1,6 +1,8 @@
 package usecase
 
 import (
+	"fmt"
+
 	services "github.com/abhinandkakkadi/offer-store/pkg/usecase/interface"
 )
 
@@ -11,8 +13,10 @@ func NewUserUseCase() services.UserUseCase {
 	return &userUseCase{}
 }
 
-func (u *userUseCase) UserSignUp() {
+func (u *userUseCase) GetValueBasedOnCountry() {
 
+	offer := ReturnOffer("US")
+	fmt.Println(offer)
 }
 
 func (u *userUseCase) LoginHandler() {

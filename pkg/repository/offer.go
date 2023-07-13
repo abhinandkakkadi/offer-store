@@ -16,11 +16,12 @@ func NewUserRepository(DB *gorm.DB) interfaces.UserRepository {
 	return &UserDatabase{DB}
 }
 
-func (u *UserDatabase) GetOfferBasedOnCountry(country string,OfferContainer models.OfferCompany) {
+func (u *UserDatabase) GetOfferBasedOnCountry(country string,OfferContainer models.OfferCompany) models.OfferCompany {
 
 	if err := u.DB.Raw("select * from offer_company where country = ?",country).Scan(&OfferContainer).Error; err != nil  {
 		fmt.Println(err)
 	}	
 
-	fmt.Println(OfferContainer)
+	return OfferContainer
+	
 }
