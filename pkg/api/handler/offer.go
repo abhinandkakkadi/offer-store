@@ -33,14 +33,14 @@ func NewUserHandler(usecase services.UserUseCase) *UserHandler {
 func (u *UserHandler) GetValueBasedOnCountry(c *fiber.Ctx) error {
 
 	country := c.Params("country")
-	offerBasedOnCountry,err := u.userUseCase.GetValueBasedOnCountry(country)
+	offerBasedOnCountry, err := u.userUseCase.GetValueBasedOnCountry(country)
 	if err != nil {
-		errRes := response.ClientResponse(http.StatusBadRequest,"field not in right format",nil,err.Error())
+		errRes := response.ClientResponse(http.StatusBadRequest, "field not in right format", nil, err.Error())
 		c.Status(http.StatusBadRequest).JSON(errRes)
 		return nil
 	}
 
-	sucRes := response.ClientResponse(http.StatusOK,"successfully retrieved offers",offerBasedOnCountry,nil)
+	sucRes := response.ClientResponse(http.StatusOK, "successfully retrieved offers", offerBasedOnCountry, nil)
 	c.Status(http.StatusOK).JSON(sucRes)
 
 	return nil
@@ -59,7 +59,7 @@ func (u *UserHandler) AddNewOffer(c *fiber.Ctx) error {
 
 	var addOffer models.AddNewOffer
 	if err := c.BodyParser(&addOffer); err != nil {
-		errRes := response.ClientResponse(http.StatusBadRequest,"field not in right format",nil,err.Error())
+		errRes := response.ClientResponse(http.StatusBadRequest, "field not in right format", nil, err.Error())
 		c.Status(http.StatusBadRequest).JSON(errRes)
 		return nil
 	}
@@ -68,12 +68,12 @@ func (u *UserHandler) AddNewOffer(c *fiber.Ctx) error {
 
 	err := u.userUseCase.AddNewOffer(addOffer)
 	if err != nil {
-		errRes := response.ClientResponse(http.StatusBadRequest,"could not add offer",nil,err.Error())
+		errRes := response.ClientResponse(http.StatusBadRequest, "could not add offer", nil, err.Error())
 		c.Status(http.StatusBadRequest).JSON(errRes)
 		return nil
 	}
 
-	sucRes := response.ClientResponse(http.StatusCreated,"successfully added new offer",nil,nil)
+	sucRes := response.ClientResponse(http.StatusCreated, "successfully added new offer", nil, nil)
 	c.Status(http.StatusCreated).JSON(sucRes)
 
 	return nil

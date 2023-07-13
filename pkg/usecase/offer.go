@@ -18,20 +18,20 @@ func NewUserUseCase(repo interfaces.UserRepository) services.UserUseCase {
 	}
 }
 
-func (u *userUseCase) GetValueBasedOnCountry(country string) ([]models.OfferCompany,error) {
+func (u *userUseCase) GetValueBasedOnCountry(country string) ([]models.OfferCompany, error) {
 
 	countryExist := contains(country)
 	if !countryExist {
-		return []models.OfferCompany{},errors.New("country does not exists")
+		return []models.OfferCompany{}, errors.New("country does not exists")
 	}
 
 	offer := ReturnOffer(country)
-	return offer,nil
+	return offer, nil
 
 }
 
 func (u *userUseCase) AddNewOffer(addOffer models.AddNewOffer) error {
-	
+
 	countryExist := contains(addOffer.Country)
 	if !countryExist {
 		return errors.New("country does not exists")

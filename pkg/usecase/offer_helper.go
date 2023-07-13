@@ -52,8 +52,8 @@ func ReturnOffer(country string) []models.OfferCompany {
 	return []models.OfferCompany{}
 }
 
-
 var ValidCountryValues = []string{"US", "CA", "FR", "BR"}
+
 func contains(value string) bool {
 
 	for _, item := range ValidCountryValues {
@@ -62,5 +62,5 @@ func contains(value string) bool {
 		}
 	}
 	return false
-	
+
 }
