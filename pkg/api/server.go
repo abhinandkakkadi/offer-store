@@ -1,6 +1,8 @@
 package http
 
 import (
+	"compress/gzip"
+
 	_ "github.com/abhinandkakkadi/offer-store/pkg/api/handler"
 	handler "github.com/abhinandkakkadi/offer-store/pkg/api/handler"
 	"github.com/abhinandkakkadi/offer-store/pkg/api/routes"
@@ -21,7 +23,7 @@ func NewServerHTTP(userHandler *handler.UserHandler) *ServerHTTP {
 
 		// Middleware function for data compression
 		router.Use(compress.New(compress.Config{
-			Level: compress.LevelBestSpeed,
+			Level: gzip.BestSpeed,
 	}))
 
 	// Setting Swagger Routes
