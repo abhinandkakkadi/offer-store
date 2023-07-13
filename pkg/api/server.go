@@ -32,5 +32,5 @@ func NewServerHTTP(userHandler *handler.UserHandler) *ServerHTTP {
 
 func (sh *ServerHTTP) Start(userRepository interfaces.UserRepository) {
 	go usecase.OfferUseCase(userRepository)
-	sh.engine.Listen(":8080")
+	sh.engine.Listen(":3000")
 }
