@@ -16,7 +16,7 @@ func main() {
 	docs.SwaggerInfo.Title = "offer-store"
 	docs.SwaggerInfo.Description = "OFFER COMPANY"
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "localhost:3000"
+	docs.SwaggerInfo.Host = "abhinandkakkadi.com"
 	docs.SwaggerInfo.BasePath = ""
 	docs.SwaggerInfo.Schemes = []string{"http"}
 
