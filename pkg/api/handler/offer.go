@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 
 	services "github.com/abhinandkakkadi/offer-store/pkg/usecase/interface"
 )
@@ -25,8 +25,8 @@ func NewUserHandler(usecase services.UserUseCase) *UserHandler {
 // @Success 200 {object} response.Response{}
 // @Failure 500 {object} response.Response{}
 // @Router /signup [post]
-func (u *UserHandler) UserSignUp(c *fiber.Ctx) {
-
+func (u *UserHandler) UserSignUp(c *fiber.Ctx) error {
+	return nil
 }
 
 // @Summary LogIn functionality for user
@@ -38,6 +38,6 @@ func (u *UserHandler) UserSignUp(c *fiber.Ctx) {
 // @Success 200 {object} response.Response{}
 // @Failure 500 {object} response.Response{}
 // @Router /login [post]
-func (u *UserHandler) LoginHandler(c *fiber.Ctx) {
-
+func (u *UserHandler) LoginHandler(c *fiber.Ctx) error {
+	return nil
 }

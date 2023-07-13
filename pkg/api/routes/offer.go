@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/abhinandkakkadi/offer-store/pkg/api/handler"
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 )
 
 func UserRoutes(router fiber.Router, userHandler *handler.UserHandler) {
