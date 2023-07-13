@@ -17,7 +17,7 @@ func NewServerHTTP(userHandler *handler.UserHandler) *ServerHTTP {
 	router := fiber.New()
 
 	router.Use(compress.New(compress.Config{
-		Level: compress.LevelBestSpeed, 
+		Level: compress.LevelBestSpeed,
 	}))
 
 	routes.UserRoutes(router.Group("/"), userHandler)

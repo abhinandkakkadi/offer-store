@@ -13,7 +13,6 @@ func NewUserRepository(DB *gorm.DB) interfaces.UserRepository {
 	return &UserDatabase{DB}
 }
 
-
 func (u *UserDatabase) GetOfferBasedOnCountry() {
-	
+
 }
