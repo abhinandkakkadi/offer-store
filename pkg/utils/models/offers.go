@@ -21,3 +21,22 @@ type OfferCompany struct {
 	StoreURLTitle      string    `gorm:"not null"`
 	OfferHome          int       `gorm:"not null"`
 }
+
+type AddNewOffer struct {
+	ClientID           uint      `json:"clientId"`
+	Country            string    `json:"country"`
+	Image              string    `json:"image"`
+	ImageWidth         int       `json:"imageWidth"`
+	ImageHeight        int       `json:"imageHeight"`
+	TextLocale         string    `json:"textLocale"`
+	ValidityTextLocale string    `json:"validityTextLocale"`
+	Position           int       `json:"position"`
+	ValidFrom          time.Time `json:"validFrom"`
+	ShowFrom           time.Time `json:"showFrom"`
+	ValidTo            time.Time `json:"validTo"`
+	Flag               uint      `json:"flag"`
+	PageCount          uint      `json:"pageCount"`
+	StoreURL           string    `json:"storeURL"`
+	StoreURLTitle      string    `json:"storeURLTitle"`
+	OfferHome          int       `json:"offerHome"`
+}

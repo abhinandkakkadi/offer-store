@@ -7,7 +7,7 @@ import (
 
 func UserRoutes(router fiber.Router, userHandler *handler.UserHandler) {
 
-	router.Post("/signup", userHandler.UserSignUp)
-	router.Post("/login", userHandler.LoginHandler)
+	router.Get("/get-offer/:country", userHandler.GetValueBasedOnCountry)
+	router.Post("/add-offer", userHandler.AddNewOffer)
 
 }

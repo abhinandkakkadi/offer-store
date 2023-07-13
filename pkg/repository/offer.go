@@ -16,12 +16,28 @@ func NewUserRepository(DB *gorm.DB) interfaces.UserRepository {
 	return &UserDatabase{DB}
 }
 
-func (u *UserDatabase) GetOfferBasedOnCountry(country string,OfferContainer models.OfferCompany) models.OfferCompany {
+func (u *UserDatabase) GetOfferBasedOnCountry(country string) []models.OfferCompany {
 
-	if err := u.DB.Raw("select * from offer_company where country = ?",country).Scan(&OfferContainer).Error; err != nil  {
+	var Offer []models.OfferCompany
+	if err := u.DB.Raw("select * from offer_company where country = ?", country).Scan(&Offer).Error; err != nil {
 		fmt.Println(err)
-	}	
+	}
 
-	return OfferContainer
-	
+	return Offer
+
+}
+
+func (u *UserDatabase) AddNewOffer(addOffer models.AddNewOffer) error  {
+
+	if err := u.DB.Exec(`
+	INSERT INTO offer_company 
+		(client_id, country, image, image_width, image_height, text_locale, validity_text_locale, position, valid_from, show_from, valid_to, flag, page_count, store_url, store_url_title, offer_home) 
+	VALUES 
+		(?, ?,?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?)
+`, addOffer.ClientID, addOffer.Country, addOffer.Image, addOffer.ImageWidth, addOffer.ImageHeight, addOffer.TextLocale, addOffer.ValidityTextLocale, addOffer.Position,addOffer.ValidFrom ,addOffer.ShowFrom, addOffer.ValidTo, addOffer.Flag, addOffer.PageCount, addOffer.StoreURL, addOffer.StoreURLTitle, addOffer.OfferHome).Error; err != nil {
+		return err
+	}
+
+	return nil
+
 }

@@ -12,24 +12,25 @@ import (
 	"github.com/abhinandkakkadi/offer-store/pkg/config"
 	"github.com/abhinandkakkadi/offer-store/pkg/db"
 	"github.com/abhinandkakkadi/offer-store/pkg/repository"
+	interfaces "github.com/abhinandkakkadi/offer-store/pkg/repository/interface"
 	"github.com/abhinandkakkadi/offer-store/pkg/usecase"
 )
 
 // Injectors from wire.go:
 
-func InitializeAPI(cfg config.Config) (*http.ServerHTTP, error) {
+func InitializeAPI(cfg config.Config) (*http.ServerHTTP, interfaces.UserRepository, error) {
 
 	gormDB, err := db.ConnectDatabase(cfg)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	userRepository := repository.NewUserRepository(gormDB)
-	usecase.OfferUseCase(userRepository)
-	userUseCase := usecase.NewUserUseCase()
+	userUseCase := usecase.NewUserUseCase(userRepository)
 	userHandler := handler.NewUserHandler(userUseCase)
-
 	serverHTTP := http.NewServerHTTP(userHandler)
-	return serverHTTP, nil
+	// usecase.OfferUseCase(userRepository)
+
+	return serverHTTP, userRepository, nil
 
 }
