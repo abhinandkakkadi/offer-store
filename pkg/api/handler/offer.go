@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
+	"go.mongodb.org/mongo-driver/bson"
 
 	services "github.com/abhinandkakkadi/offer-store/pkg/usecase/interface"
 	"github.com/abhinandkakkadi/offer-store/pkg/utils/models"
@@ -41,7 +42,30 @@ func (u *UserHandler) GetValueBasedOnCountry(c *fiber.Ctx) error {
 	}
 
 	sucRes := response.ClientResponse(http.StatusOK, "successfully retrieved offers", offerBasedOnCountry, nil)
-	c.Status(http.StatusOK).JSON(sucRes)
+
+	contentType := c.Get("Type")
+
+	if contentType == "json" {
+
+		c.JSON(sucRes)
+
+	} else if contentType == "bson" {
+
+		bsonData, err := bson.Marshal(sucRes)
+		if err != nil {
+			c.Status(fiber.StatusInternalServerError).SendString("Error marshaling data to BSON")
+			return nil
+		}
+		c.Set(fiber.HeaderContentType, "application/bson")
+		c.Send(bsonData)
+
+	} else {
+
+		c.Status(http.StatusBadRequest).SendString("specify json or bson")
+
+	}
+
+	// c.Status(http.StatusOK).JSON(sucRes)
 
 	return nil
 }
