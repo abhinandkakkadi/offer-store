@@ -22,7 +22,7 @@ var OfferContainers = map[string][]models.OfferCompany{}
 // 	OfferContainers["BR"] = []models.OfferCompany{}
 // }
 
-// function to retrieve offers from database in every 10 seconds concurrently for every countries
+// function to retrieve offers from database in every 10 seconds concurrently from every countries
 func OfferUseCase(userRepository interfaces.UserRepository) {
 
 	for {
