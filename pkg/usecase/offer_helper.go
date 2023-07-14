@@ -8,29 +8,42 @@ import (
 )
 
 // RAM storage for all countries
-var OfferContainerUS = []models.OfferCompany{}
-var OfferContainerCA = []models.OfferCompany{}
-var OfferContainerFR = []models.OfferCompany{}
-var OfferContainerBR = []models.OfferCompany{}
+// var OfferContainerUS = []models.OfferCompany{}
+// var OfferContainerCA = []models.OfferCompany{}
+// var OfferContainerFR = []models.OfferCompany{}
+// var OfferContainerBR = []models.OfferCompany{}
+
+var OfferContainers = map[string][]models.OfferCompany{}
+
+// func init() {
+// 	OfferContainers["US"] = []models.OfferCompany{}
+// 	OfferContainers["CA"] = []models.OfferCompany{}
+// 	OfferContainers["FR"] = []models.OfferCompany{}
+// 	OfferContainers["BR"] = []models.OfferCompany{}
+// }
 
 // function to retrieve offers from database in every 10 seconds
 func OfferUseCase(userRepository interfaces.UserRepository) {
 
 	for {
 		go func() {
-			OfferContainerUS = userRepository.GetOfferBasedOnCountry("US")
+			// OfferContainerUS = userRepository.GetOfferBasedOnCountry("US")
+			OfferContainers["US"] = userRepository.GetOfferBasedOnCountry("US") 
 		}()
 
 		go func() {
-			OfferContainerCA = userRepository.GetOfferBasedOnCountry("CA")
+			// OfferContainerCA = userRepository.GetOfferBasedOnCountry("CA")
+			OfferContainers["CA"] = userRepository.GetOfferBasedOnCountry("CA")
 		}()
 
 		go func() {
-			OfferContainerFR = userRepository.GetOfferBasedOnCountry("FR")
+			// OfferContainerFR = userRepository.GetOfferBasedOnCountry("FR")
+			OfferContainers["FR"] = userRepository.GetOfferBasedOnCountry("FR")
 		}()
 
 		go func() {
-			OfferContainerBR = userRepository.GetOfferBasedOnCountry("BR")
+			// OfferContainerBR = userRepository.GetOfferBasedOnCountry("BR")
+			OfferContainers["BR"] = userRepository.GetOfferBasedOnCountry("BR")
 		}()
 
 		time.Sleep(10 * time.Second)
@@ -43,13 +56,13 @@ func ReturnOffer(country string) []models.OfferCompany {
 
 	switch {
 	case country == "US":
-		return OfferContainerUS
+		return OfferContainers["US"]
 	case country == "CA":
-		return OfferContainerCA
+		return OfferContainers["CA"]
 	case country == "FR":
-		return OfferContainerFR
+		return OfferContainers["FR"]
 	case country == "BR":
-		return OfferContainerBR
+		return OfferContainers["BR"]
 	}
 
 	return []models.OfferCompany{}

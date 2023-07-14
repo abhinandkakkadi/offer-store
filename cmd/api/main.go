@@ -9,6 +9,7 @@ import (
 	di "github.com/abhinandkakkadi/offer-store/pkg/di"
 	_ "github.com/swaggo/files"
 	_ "github.com/swaggo/gin-swagger"
+	_ "github.com/abhinandkakkadi/offer-store/pkg/usecase"
 )
 
 func main() {
