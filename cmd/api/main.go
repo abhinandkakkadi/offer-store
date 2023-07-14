@@ -7,9 +7,9 @@ import (
 	_ "github.com/abhinandkakkadi/offer-store/cmd/api/docs"
 	config "github.com/abhinandkakkadi/offer-store/pkg/config"
 	di "github.com/abhinandkakkadi/offer-store/pkg/di"
+	_ "github.com/abhinandkakkadi/offer-store/pkg/usecase"
 	_ "github.com/swaggo/files"
 	_ "github.com/swaggo/gin-swagger"
-	_ "github.com/abhinandkakkadi/offer-store/pkg/usecase"
 )
 
 func main() {
