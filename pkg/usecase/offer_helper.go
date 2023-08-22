@@ -7,11 +7,8 @@ import (
 	"github.com/abhinandkakkadi/offer-store/pkg/utils/models"
 )
 
-
 // storage in main memory for efficient retrievel
 var OfferContainers = map[string][]models.OfferCompany{}
-
-
 
 // function to retrieve offers from database in every 10 seconds concurrently from every countries
 func OfferUseCase(userRepository interfaces.UserRepository) {
