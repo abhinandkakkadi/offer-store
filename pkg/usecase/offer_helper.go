@@ -7,20 +7,11 @@ import (
 	"github.com/abhinandkakkadi/offer-store/pkg/utils/models"
 )
 
-// RAM storage for all countries
-// var OfferContainerUS = []models.OfferCompany{}
-// var OfferContainerCA = []models.OfferCompany{}
-// var OfferContainerFR = []models.OfferCompany{}
-// var OfferContainerBR = []models.OfferCompany{}
 
+// storage in main memory for efficient retrievel
 var OfferContainers = map[string][]models.OfferCompany{}
 
-// func init() {
-// 	OfferContainers["US"] = []models.OfferCompany{}
-// 	OfferContainers["CA"] = []models.OfferCompany{}
-// 	OfferContainers["FR"] = []models.OfferCompany{}
-// 	OfferContainers["BR"] = []models.OfferCompany{}
-// }
+
 
 // function to retrieve offers from database in every 10 seconds concurrently from every countries
 func OfferUseCase(userRepository interfaces.UserRepository) {
